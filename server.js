@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: 'http://localhost:8080', // Cambia si usas otro puerto para el frontend
+  origin: 'https://neurofi-web.onrender.com', // Cambia si usas otro puerto para el frontend
 }));
 
 app.post('/api/chat', async (req, res) => {
