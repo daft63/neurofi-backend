@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: 'https://neurofi-web.onrender.com', // Cambia si usas otro puerto para el frontend
+  origin: 'https://neurofi-web.onrender.com', // Asegúrate que esta URL sea la del frontend
 }));
 
 app.post('/api/chat', async (req, res) => {
@@ -23,7 +23,7 @@ app.post('/api/chat', async (req, res) => {
     const response = await axios.post(
       'https://api.openai.com/v1/chat/completions',
       {
-        model: 'gpt-3.5-turbo', // Cambia por otro si usas otro modelo
+        model: 'gpt-3.5-turbo', // El modelo más económico y rápido
         messages: [{ role: 'user', content: message }],
       },
       {
@@ -33,6 +33,9 @@ app.post('/api/chat', async (req, res) => {
         },
       }
     );
+
+    // ✅ Log útil para verificar si OpenAI respondió bien
+    console.log('Respuesta de OpenAI:', response.data);
 
     const reply = response.data.choices[0].message.content;
     res.json({ reply });
